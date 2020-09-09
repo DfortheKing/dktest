@@ -14,7 +14,7 @@
         <module>crm_utils</module>
         <module>crm_entity</module>
     </modules>
-    <!--父模块打包方式-->
+    <!--父模块打包方式  v2v2v2v2-->
     <packaging>pom</packaging>
 
     <dependencies>
