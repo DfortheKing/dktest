@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 	http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--配置EntityManagerFactory：替换原JPA的xml中的配置-->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--扫描加载映射实体-->
+        <property name="packagesToScan" value="com.yaorange.entity"/>
+        <!--配置JPA底层实现厂商-->
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <!--开发阶段的配置,项目发布时需要删除-->
+        <!--配置Hibernate相关属性-->
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+                <!--Spring默认按照数据库选择，也可以显式指定方言-->
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</prop>-->
+            </props>
+        </property>
+    </bean>
+
+    <!--配置JPA实现厂商-->
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+</beans>
